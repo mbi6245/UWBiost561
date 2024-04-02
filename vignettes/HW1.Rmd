@@ -39,7 +39,6 @@ The function first checks whether or not n is a natural number, and then generat
 ```{r}
 reps = 10000
 ns = c(1, 2, 3, 5, 10, 100)
-mean(generate_data(n))
 par(mfrow = c(2, 3))
 res_mat = matrix(nrow = length(ns), ncol = reps)
 for (i in 1:length(ns)) {
