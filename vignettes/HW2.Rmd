@@ -1,0 +1,60 @@
+---
+title: "HW2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HW2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(bookdown)
+library(tidyverse)
+library(ggplot2)
+country_population = readr::read_csv("https://raw.githubusercontent.com/linnykos/561_s2024_public/main/HW2_files/country_population.csv")
+country_birth = readr::read_csv("https://raw.githubusercontent.com/linnykos/561_s2024_public/main/HW2_files/country_birth.csv")
+```
+
+# Q1: 
+
+## Part A
+
+```{r}
+# iso3c and country are both primary keys in this dataset
+# after running summarize, only the grouped by columns and 
+# the new column created within summarize will exist in the resulting dataframe
+country_population %>% filter((1990 <= year) & (year <= 2010)) %>%
+  group_by(iso3c, country) %>% 
+  summarize(mean_population = mean(population))
+```
+
+# Q2:
+
+## Part B
+
+```{r}
+country_birth %>% filter((1990 <= year) & (year <= 2010)) %>%
+  dplyr::select(iso3c, year, life_expect) %>% 
+  na.omit() %>% 
+  group_by(iso3c) %>% 
+  summarize(max_life_expect = max(life_expect),
+            min_life_expect = min(life_expect)) %>% 
+  mutate(range_life_expect = max_life_expect - min_life_expect)
+```
+
+# Part C
+
+```{r}
+country_both = inner_join(country_population, country_birth, by = "iso3c")
+country_both
+```
+
+`country_both` has `r dim(country_both)` rows and columns, respectively in it.
+
+# Q3: 
+
+
