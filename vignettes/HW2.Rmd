@@ -134,3 +134,8 @@ ggplot(data = mat_long2, mapping = aes(x = X, y = Y, fill = factor(Value))) +
   labs(fill = "Value")
 ```
 
+This tells us that without reversing the order originally in the construction of the random matrix, the 1 values are heavily concentrated in the top left, which is given by the clique section of the code. Thus, `adj_mat2` is just the original matrix with the clique non reversed/intact, which is shown in the heatmap here.
+
+# Problem 4
+
+To ensure this teammate's function is correct, I would write a few test cases which which I could test the function. The first test case would be a clique density of 1, which would make the entire matrix a clique. I would then write a test case with 0 density, so no clique. Then, my last 2 test cases would just be some test cases of realistic data from adjacency matrices, so just some random values for the clique density between 0 and 1.
