@@ -1,0 +1,64 @@
+---
+title: "HW3"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HW3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(bookdown)
+library(tidyverse)
+library(ggplot2)
+library(UWBiost561)
+```
+
+# Q1: 
+
+## Part A
+
+N/A
+
+## Part B
+
+N/A
+
+## Part C
+
+N/A
+
+## Part D
+
+```{r}
+set.seed(0)
+simulation = UWBiost561::generate_partial_clique(
+  n = 10,
+  clique_fraction = 0.5,
+  clique_edge_density = 0.9
+)
+
+simulation$adj_mat
+```
+
+```{r}
+set.seed(0)
+simulation <- UWBiost561::generate_partial_clique(
+  n = 10,
+  clique_fraction = 0.5,
+  clique_edge_density = 0.9
+)
+
+adj_mat <- simulation$adj_mat
+
+res <- UWBiost561::compute_maximal_partial_clique(
+  adj_mat = adj_mat,
+  alpha = 0.9
+)
+res
+```
+
