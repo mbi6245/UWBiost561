@@ -41,6 +41,6 @@ generate_partial_clique = function (n, clique_fraction, clique_edge_density) {
   return(output)
 }
 
-generate_partial_clique(n = 10, clique_fraction = 0.5, clique_edge_density = 0.9)
+temp = generate_partial_clique(n = 10, clique_fraction = 0.5, clique_edge_density = 0.9)
 
 
