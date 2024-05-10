@@ -3,7 +3,7 @@ library(UWBiost561)
 
 test_check("UWBiost561")
 
-context("Testing generate_partial_clique and compute_maximal_partial_clique in the corresponding R folder")
+context("Testing generate_partial_clique in the corresponding R folder")
 
 test_that("generate_partial_clique has proper density", {
   medium = 10
