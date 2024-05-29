@@ -15,7 +15,7 @@ calculate_edge_density = function(adj_mat, clique_idx) {
 }
 
 compute_maximal_partial_clique <- function(adj_mat, alpha) {
-  if (nrow(adj_mat) < 5 || nrow_adj_mat > 50) {
+  if (nrow(adj_mat) < 5 || nrow(adj_mat) > 50) {
     stop("adj_mat must have between 5 and 50 rows inclusive")
   }
   if(alpha < 0 || alpha > 1) {

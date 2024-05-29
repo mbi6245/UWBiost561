@@ -13,9 +13,198 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(bookdown)
+library(testthat)
 library(tidyverse)
 library(ggplot2)
 library(UWBiost561)
 ```
 
-# 
+#  Question 1
+
+## Part A
+
+N/A
+
+## Part B
+
+* implementation no. 4: this function first checks whether or not all of the argumens specified by the user are within the given constraints, then establishes a function to check whether or not some given indices are a valid partial clique, initializes a partial clique with the first index, and then loops through the remaining indices, adding them to the list of indices if it still maintains a valid clique as specified by the user.
+* Implementation no. 5: this function first checks whether or not all of the arguments specified by the user are within the given constraints, creates an igraph object, then establishes/calls a function to find the maximal partial clique by looking at all possible combinations of indices from the igraph object, then taking clique with the highest edge density that satisfies the aforementioned constraints
+
+## Part C
+
+* implementation no. 4: this function is well commented and each block of code clearly serves the intended purpose that is detailed by its corresponding comment
+* implementation no. 5: this function has no inline comments and many of the checks in the initial part of it are all bunched into one line, making it somewhat unreadable; there are also no details whatsoever on what the igraph object is doing, and I was only able to glean what little information I had from other similarly implemented functions
+
+## Part D
+
+```{r, error=TRUE}
+# implementation 4
+test_that("compute_maximal_partial_clique is right size", {
+  big = 51
+  expect_error(UWBiost561::compute_maximal_partial_clique4(adj_mat = matrix(1,
+                                                                           nrow = big,
+                                                                           ncol = big),
+                                                          alpha = 0.9),
+               "adj_mat must have between 5 and 50 rows inclusive")
+})
+
+test_that("compute maximal_partial clique accepts correct alpha", {
+  dense = 1.1
+  expect_error(UWBiost561::compute_maximal_partial_clique4(adj_mat = matrix(1,
+                                                                           nrow = 10,
+                                                                           ncol = 10),
+                                                          alpha = dense),
+               "alpha must be between 0 and 1 inclusive")
+})
+
+test_that("compute_maximal_partial_clique has correct output", {
+  set.seed(0)
+  simulation = UWBiost561::generate_partial_clique(
+    n = 10,
+    clique_fraction = 0.5,
+    clique_edge_density = 0.9
+  )
+
+  res <- UWBiost561::compute_maximal_partial_clique4(
+    adj_mat = simulation$adj_mat,
+    alpha = 0.9
+  )
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5)), res$edge_density == 0.9)
+})
+
+test_that("compute maximal_partial_clique has correct output", {
+  set.seed(0)
+  res = UWBiost561::compute_maximal_partial_clique4(
+    adj_mat = matrix(1, nrow = 10, ncol = 10),
+    alpha = 1
+  )
+
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), res$edge_density == 1)
+})
+
+test_that("compute_maximal_partial_clique has correct output", {
+  set.seed(0)
+
+  simulation = UWBiost561::generate_partial_clique(
+    n = 10,
+    clique_fraction = 0,
+    clique_edge_density = 0
+  )
+
+  res = UWBiost561::compute_maximal_partial_clique4(
+    adj_mat = simulation$adj_mat,
+    alpha = 0
+  )
+
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), res$edge_density == 0)
+})
+```
+
+```{r, error=TRUE}
+# implementation 5
+test_that("compute_maximal_partial_clique is right size", {
+  big = 51
+  expect_error(UWBiost561::compute_maximal_partial_clique5(adj_mat = matrix(1,
+                                                                           nrow = big,
+                                                                           ncol = big),
+                                                          alpha = 0.9),
+               "adj_mat must have between 5 and 50 rows inclusive")
+})
+
+test_that("compute maximal_partial clique accepts correct alpha", {
+  dense = 1.1
+  expect_error(UWBiost561::compute_maximal_partial_clique5(adj_mat = matrix(1,
+                                                                           nrow = 10,
+                                                                           ncol = 10),
+                                                          alpha = dense),
+               "alpha must be between 0 and 1 inclusive")
+})
+
+test_that("compute_maximal_partial_clique has correct output", {
+  set.seed(0)
+  simulation = UWBiost561::generate_partial_clique(
+    n = 10,
+    clique_fraction = 0.5,
+    clique_edge_density = 0.9
+  )
+
+  res <- UWBiost561::compute_maximal_partial_clique5(
+    adj_mat = simulation$adj_mat,
+    alpha = 0.9
+  )
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5)), res$edge_density == 0.9)
+})
+
+test_that("compute maximal_partial_clique has correct output", {
+  set.seed(0)
+  res = UWBiost561::compute_maximal_partial_clique5(
+    adj_mat = matrix(1, nrow = 10, ncol = 10),
+    alpha = 1
+  )
+
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), res$edge_density == 1)
+})
+
+test_that("compute_maximal_partial_clique has correct output", {
+  set.seed(0)
+
+  simulation = UWBiost561::generate_partial_clique(
+    n = 10,
+    clique_fraction = 0,
+    clique_edge_density = 0
+  )
+
+  res = UWBiost561::compute_maximal_partial_clique5(
+    adj_mat = simulation$adj_mat,
+    alpha = 0
+  )
+
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), res$edge_density == 0)
+})
+
+```
+
+# Question 2
+
+## Part A
+
+```{r}
+library(UWBiost561)
+set.seed(10)
+data <- UWBiost561::generate_partial_clique(n = 50, 
+                                            clique_fraction = 0.5,
+                                            clique_edge_density = 0.95)
+
+set.seed(10)
+result1 <- UWBiost561::compute_maximal_partial_clique_master(
+  adj_mat = data$adj_mat, 
+  alpha = 0.95, 
+  number = 11, 
+  time_limit = 5
+)
+result1
+
+set.seed(10)
+result2 <- UWBiost561::compute_maximal_partial_clique12(
+  adj_mat = data$adj_mat, 
+  alpha = 0.95
+)
+result2
+```
+
+## Part B
+
+1. I'm going to use the `generate_partial_clique` function with the default settings from the last homework. It generates cliques with 1s along the diagonal and all edges filled except for one in the top 5 by 5 clique in the top left. It's also symmetric across the diagonal.
+1. I'll only vary alpha across the levels of my analysis.
+1. I'm using all 25 implementations of `compute_maximal_partial_clique`
+1. I'm hoping to see whether or not the different implementations can correctly deduce a maximal partial clique.
+1. I'm just going to have 1 trial per level of alpha
+1. Since I'm going to use `n = 10`, I don't expect my simulation study to take too long, perhaps around 5 minutes
+
+## Part C
+
+N/A
+
+## Part D
+
+N/A

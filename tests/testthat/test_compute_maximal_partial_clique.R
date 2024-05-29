@@ -9,7 +9,7 @@ test_that("compute_maximal_partial_clique is right size", {
   big = 51
   expect_error(UWBiost561::compute_maximal_partial_clique(adj_mat = matrix(1,
                                                                            nrow = big,
-                                                                           nrow = big),
+                                                                           ncol = big),
                                                           alpha = 0.9),
                "adj_mat must have between 5 and 50 rows inclusive")
 })
@@ -35,8 +35,7 @@ test_that("compute_maximal_partial_clique has correct output", {
     adj_mat = simulation$adj_mat,
     alpha = 0.9
   )
-
-  expect_true(res$clique_idx = c(1, 2, 3, 4, 5), res$edge_density = 0.9)
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5)), res$edge_density == 0.9)
 })
 
 test_that("compute maximal_partial_clique has correct output", {
@@ -46,7 +45,7 @@ test_that("compute maximal_partial_clique has correct output", {
     alpha = 1
   )
 
-  expect_true(res$clique_idx = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), res$edge_density = 1)
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), res$edge_density == 1)
 })
 
 test_that("compute_maximal_partial_clique has correct output", {
@@ -63,5 +62,5 @@ test_that("compute_maximal_partial_clique has correct output", {
     alpha = 0
   )
 
-  expect_true(res$clique_idx = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), res$edge_density = 0)
+  expect_true(setequal(res$clique_idx, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)), res$edge_density == 0)
 })
