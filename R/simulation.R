@@ -12,7 +12,6 @@ simulation = function(n, alphas) {
   if (!is.vector(alphas) || !all(is.numeric(alphas)) || !all(0 <= alphas) || !all(alphas <= 1)) {
     stop("alphas must be a vector of numbers between 0 and 1 inclusive")
   }
-  # library(UWBiost561)
   num_funcs = 25
   res = matrix(NA, nrow = num_funcs, ncol = length(alphas))
   for (i in 1:length(alphas)) {
