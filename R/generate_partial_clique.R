@@ -4,7 +4,7 @@
 #' @param clique_fraction numeric proportion of the aforementioned matrix that is a clique
 #' @param clique_edge_density numeric proportion of edges expected in the generated matrix's clique
 #'
-#' @return
+#' @return adjacency matrix with clique of size, density, and fraction specified in parameters
 #' @export generate_partial_clique
 #'
 #' @examples
@@ -40,7 +40,3 @@ generate_partial_clique = function (n, clique_fraction, clique_edge_density) {
   output <- list(adj_mat = adj_mat)
   return(output)
 }
-
-temp = generate_partial_clique(n = 10, clique_fraction = 0.5, clique_edge_density = 0.9)
-
-

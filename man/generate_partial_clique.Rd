@@ -13,6 +13,9 @@ generate_partial_clique(n, clique_fraction, clique_edge_density)
 
 \item{clique_edge_density}{numeric proportion of edges expected in the generated matrix's clique}
 }
+\value{
+adjacency matrix with clique of size, density, and fraction specified in parameters
+}
 \description{
 Title
 }

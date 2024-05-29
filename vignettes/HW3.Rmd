@@ -62,3 +62,12 @@ res <- UWBiost561::compute_maximal_partial_clique(
 res
 ```
 
+# Problem 3
+
+
+
+# Problem 4
+
+# LLM Appendix
+
+Used ChatGPT for ~10 generations of both `generate_partial_clique` and `compute_maximal_partial_clique` functions. Most debugging was done by myself, but I did ask ChatGPT to correct its own errors at times.
