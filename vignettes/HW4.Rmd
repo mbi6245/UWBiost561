@@ -197,7 +197,7 @@ result2
 1. I'm going to use the `generate_partial_clique` function with the default settings from the last homework. It generates cliques with 1s along the diagonal and all edges filled except for one in the top 5 by 5 clique in the top left. It's also symmetric across the diagonal.
 1. I'll only vary alpha across the levels of my analysis.
 1. I'm using all 25 implementations of `compute_maximal_partial_clique`
-1. I'm hoping to see whether or not the different implementations can correctly deduce a maximal partial clique.
+1. I'm hoping to see whether or not the different implementations can correctly deduce a maximal partial clique. This will be determined by checking whether or not the edge density calculated by an implementation is correct, incorrect, or if the implementation didn't finish running. I'll plot the occurrences of each in a barplot for each level of alpha.
 1. I'm just going to have 1 trial per level of alpha
 1. Since I'm going to use `n = 10`, I don't expect my simulation study to take too long, perhaps around 5 minutes
 
@@ -208,3 +208,27 @@ N/A
 ## Part D
 
 N/A
+
+## Part E
+
+![beginning of devtools check output](q2ep1.png){width=50%}
+
+![end of devtools check output](q2ep2.png){width=50%}
+
+# Question 3
+
+## Part A
+
+N/A
+
+## Part B
+
+N/A
+
+## Part C
+
+N/A
+
+## Part D
+
+![plot of results](HW4_simulation.png){width=50%}
