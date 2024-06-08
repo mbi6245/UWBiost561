@@ -19,3 +19,4 @@ Suggests:
 VignetteBuilder: knitr
 Imports:
     igraph
+URL: https://mbi6245.github.io/UWBiost561/

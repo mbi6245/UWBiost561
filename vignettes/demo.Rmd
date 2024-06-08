@@ -1,0 +1,45 @@
+---
+title: "demo"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{demo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r setup}
+library(UWBiost561)
+library(tidyverse)
+source("https://raw.githubusercontent.com/linnykos/561_s2024_public/main/HW2_files/random_graph_functions.R")
+```
+
+The following is a demo on how to use the generate partial clique function. As a brief background, this function generates an adjacency matrix with a partial clique. An adjacency matrix is a matrix where each row represents a node, and each column within each row represents a connection to any other node; 1 for connected, 0 for unconnected. A partial clique is a dense section of the matrix where a certain number of the entries are connected, the proportion of which respective to the overall size of the clique is the density of the clique.
+
+```{r}
+UWBiost561::generate_partial_clique(10, 0.5, 0.9)
+adj_mat = UWBiost561::generate_partial_clique(10, 0.5, 0.9)$adj_mat
+```
+
+Now, to find the partial clique, the package also has a function that finds the maximal partial clique demonstrated below. It will print both the indices that correspond to the maximal partial clique and the density of said clique.
+
+```{r}
+UWBiost561::compute_maximal_partial_clique(UWBiost561::generate_partial_clique(10, 0.5, 0.9)$adj_mat, 0.9)
+```
+
+```{r}
+mat_long = pivot_longer_heatmap(adj_mat)
+ggplot(data = mat_long, mapping = aes(x = X, y = Y, fill = factor(Value))) +
+  geom_tile() +
+  scale_fill_manual(values = c("palegoldenrod", "coral2"), labels = c("0", "1")) +
+  theme(aspect.ratio = 1) +
+  labs(fill = "Value")
+```
+
